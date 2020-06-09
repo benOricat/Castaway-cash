@@ -31,11 +31,7 @@ module.exports = {
            ]
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"],
-        alias: {
-            'pixi.js' : 'pixi.js/lib/index.js'
-        }
-
+        extensions: [".tsx", ".ts", ".js"]
     },
     plugins: [
         new CopyWebpackPlugin([{

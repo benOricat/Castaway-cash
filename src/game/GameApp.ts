@@ -75,7 +75,7 @@ export class GameApp extends Application implements IFullscreenContent {
                 this._appContent.drawRect(0, 0, alignment.size.x, alignment.size.y);
             } else {
                 alignment = this.appAlignment.alignment.landscape as TAlignment;
-                this._appContent.beginFill(0x00ffff);
+                this._appContent.beginFill(0);
                 this._appContent.drawRect(0, 0, alignment.size.x, alignment.size.y);
             }
         }
@@ -83,8 +83,7 @@ export class GameApp extends Application implements IFullscreenContent {
 
     public backgroundRect(rect: PIXI.Rectangle) {
         this._bg.clear();
-        this._bg.lineStyle(10, 0xff0000,);
-        this._bg.beginFill(0x0000ff);
+        this._bg.beginFill(0);
         this._bg.drawRect(rect.x, rect.y, rect.width, rect.height);
     }
 
@@ -94,24 +93,7 @@ export class GameApp extends Application implements IFullscreenContent {
     }
 
     private createContainers() {
-        this.absoluteAlignedItems = [
-            /*bottomLeftContainer*/
-            {asset: this.createCircleMarker(), offset: new Point(0, 1)},
-            /*bottomRightContainer*/
-            {asset: this.createCircleMarker(), offset: new Point(1, 1)},
-            /*centerBottomContainer*/
-            {asset: this.createCircleMarker(), offset: new Point(0.5, 1)},
-            /*centerLeftContainer*/
-            {asset: this.createCircleMarker(), offset: new Point(0, 0.5)},
-            /*centerRightContainer*/
-            {asset: this.createCircleMarker(), offset: new Point(1, 0.5)},
-            /*centerTopContainer*/
-            {asset: this.createCircleMarker(), offset: new Point(0.5, 0)},
-            /*topLeftContainer*/
-            {asset: this.createCircleMarker(), offset: new Point(0, 0)},
-            /*topRightContainer*/
-            {asset: this.createCircleMarker(), offset: new Point(1, 0)}
-        ];
+        this.absoluteAlignedItems = [];
     }
 
     private createCircleMarker(): Container {
