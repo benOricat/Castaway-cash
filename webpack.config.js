@@ -37,6 +37,9 @@ module.exports = {
         new CopyWebpackPlugin([{
             from: path.join(__dirname, 'assets'),
             to: 'assets'
+        },{
+            from: path.join(__dirname, 'data'),
+            to: 'data'
         }]),
         new HtmlWebpackPlugin({
             template: './src/index.html'

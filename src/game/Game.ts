@@ -1,15 +1,10 @@
-import {Container, Sprite, Loader} from 'pixi.js';
+import {Container} from 'pixi.js';
 import {Orientation} from "../fullscreen/types";
 import {ChestGroup} from "./ChestGroup";
 import {BackgroundGroup} from "./BackgroundGroup";
 import {Utils} from "./Utils";
 import {StakeSelector} from "./StakeSelector";
-
-enum GameState {
-    SetBet,
-    Play,
-    Complete
-};
+import {GameFlow} from "../gameFlow/GameFlow";
 
 export class Game extends Container{
 
@@ -37,7 +32,10 @@ export class Game extends Container{
         this.createBg();
         this.createChests();
         this.createStakeSelector();
+        //test code for promises
+        new GameFlow();
     }
+
 
     private createBg() {
         this._bg = new BackgroundGroup();
@@ -47,8 +45,8 @@ export class Game extends Container{
     private createChests() {
         this._chestGroup = new ChestGroup();
         this.addChild(this._chestGroup);
-        this._chestGroup.opened.add((index)=>this.onOpened(index))
-        this._chestGroup.completed.add((index)=>this.onCompleted(index))
+        this._chestGroup.opened.add((index)=>this.onOpened(index));
+        this._chestGroup.completed.add((index)=>this.onCompleted(index));
     }
 
     public update(delta: number) {
@@ -77,7 +75,7 @@ export class Game extends Container{
         const prize:number = this._currentResult[index];
         this._revealedPrizes.push(index);
         const prizeMatches:number[] = this._revealedPrizes.reduce(
-            (arr:number[], value:number, i:number)=> {
+            (arr:number[], value:number)=> {
                 if (this._currentResult[value] === prize){
                     arr.push(value);
                 }

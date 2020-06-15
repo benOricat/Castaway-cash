@@ -1,0 +1,5 @@
+{
+	"winner": true,
+	"prizeIndexes": [0, 1, 0, 2, 3, 0, 4, 5, 5],
+	"winningIndexes": [0, 2, 5]
+}
