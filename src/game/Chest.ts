@@ -1,4 +1,4 @@
-import {AnimatedSprite, Container, Loader} from 'pixi.js';
+import {AnimatedSprite, Container, Loader, Rectangle} from 'pixi.js';
 import {ChestPrizeText} from "./ChestPrizeText";
 import {Signal} from "signals";
 
@@ -51,10 +51,10 @@ export class Chest extends Container{
     private build() {
         // create an animated sprite
         const baseNum:string = '0000000000';
-        const numStr = (num:number,len:number)=>{
+        const numStr:(num:number,len:number)=>string = (num:number,len:number)=>{
             let numString = ''+num;
-            return numString = baseNum.slice(0, len - numString.length) + numString
-        }
+            return baseNum.slice(0, len - numString.length) + numString;
+        };
 
         const chestAssets = Loader.shared.resources.chest;
         const textures = new Array(35)
@@ -71,6 +71,8 @@ export class Chest extends Container{
 
         this.addChild(this._chestAnimation);
 
+        this.hitArea = new Rectangle(0,0.3*this._chestAnimation.height,this._chestAnimation.width,0.7*this._chestAnimation.height);
+
         this._prizeText = new ChestPrizeText();
         this._prizeText.x = 70;
         this._prizeText.y = 30;
@@ -86,13 +88,15 @@ export class Chest extends Container{
     private onFrameChange() {
         switch (this._state) {
             case ChestStates.over:
-                if(this._chestAnimation.currentFrame == 6){
+                if(this._chestAnimation.currentFrame >= 6){
                     this._chestAnimation.stop();
                 }
+                break;
             case ChestStates.opening:
                 if(this._chestAnimation.currentFrame > 20){
                     this._prizeText.visible = true;
                 }
+                break;
         }
     }
 
